@@ -1,5 +1,6 @@
 import os
 import json
+import unicodedata
 from typing import Any
 
 import psycopg
@@ -72,10 +73,19 @@ def ingest_lawyers_from_json(json_path: str) -> None:
         lawyer_experience = lawyer.get("anios_experiencia")
         lawyer_license = lawyer.get("cedula_profesional")
         lawyer_description = lawyer.get("descripcion")
+        
         if not lawyer_name or not lawyer_description:
             raise ValueError("Each lawyer must have 'nombre' and 'descripcion'.")
 
+        # Remove accents and convert to lowercase for consistent searching
+        lawyer_city = normalize_string(lawyer_city) if lawyer_city else None
+        lawyer_state = normalize_string(lawyer_state) if lawyer_state else None
+        lawyer_specialties = [normalize_string(s) for s in lawyer_specialties] if lawyer_specialties else []
+
+        # Generate embedding for the lawyer's description
         lawyer_embedding = embeddings.embed_query(lawyer_description)
+
+        # Prepare the row for insertion into the database
         rows.append((
             lawyer_name,
             lawyer_specialties,
@@ -115,14 +125,16 @@ def ingest_lawyers_from_json(json_path: str) -> None:
 def search_lawyers(
     description: str,
     city: str | None = None,
+    state: str | None = None,
     specialities: list[str] | None = None,
     limit: int = 3,
 ) -> list[dict[str, Any]]:
     """
-    Searches for lawyers based on the provided description, city, and speciality.
+    Searches for lawyers based on the provided description, city, state, and speciality.
     Args:
         description (str): The description to search for.
         city (str, optional): The city to filter by. Defaults to None.
+        state (str, optional): The state to filter by. Defaults to None.
         speciality (str, optional): The speciality to filter by. Defaults to None.
         limit (int, optional): The maximum number of results to return. Defaults to 3.
     Returns:
@@ -146,11 +158,18 @@ def search_lawyers(
     params = [query_vector]
 
     if city:
+        city = normalize_string(city)
         conditions.append("ciudad = %s")
         params.append(city)
 
+    if state:
+        state = normalize_string(state)
+        conditions.append("estado = %s")
+        params.append(state)
+
     if specialities:
         for speciality in specialities:
+            speciality = normalize_string(speciality)
             conditions.append("%s = ANY(especialidades)")
             params.append(speciality)
 
@@ -167,7 +186,6 @@ def search_lawyers(
 
     lawyers = []
     for result in search_results:
-        print(result)
         lawyer_name, specialties, city, state, experience, license_number, description, distance = result
         lawyers.append({
             "nombre": lawyer_name,
@@ -183,9 +201,30 @@ def search_lawyers(
     return lawyers
 
 
+def normalize_string(value: str) -> str:
+    """
+    Normalize a string by removing accents, converting to lowercase,
+    and removing non-alphanumeric characters while preserving spaces.
+
+    Args:
+        value: The string to normalize.
+
+    Returns:
+        The normalized string.
+    """
+    normalized = unicodedata.normalize("NFKD", value)
+
+    return "".join(
+        char
+        for char in normalized
+        if not unicodedata.combining(char)
+        and (char.isalnum() or char.isspace())
+    ).lower()
+
+
 if __name__ == "__main__":
     
-    INGEST = False  # Set to True to ingest lawyers from the JSON file
+    INGEST = True  # Set to True to ingest lawyers from the JSON file
 
     if INGEST:
         # Ingest lawyers from the JSON file into the vectorstore
@@ -194,4 +233,4 @@ if __name__ == "__main__":
     # Example search
     search_results = search_lawyers(description="juicios civiles, arrendamientos, herencias y amparos relacionados con derechos civiles. Ha asesorado a clientes en la redacción de contratos", limit=3)
     for result in search_results:   
-        print(f"Lawyer: {result['nombre']}, Description: {result['descripcion']}, Distance: {result['distancia']}")
+        print(f"Lawyer: {result['nombre']}, Description: {result['descripcion']}, Distance: {result['distancia']}, City: {result['ciudad']}, State: {result['estado']}")
