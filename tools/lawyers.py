@@ -50,7 +50,16 @@ def find_lawyers(lawyer_description_to_search: str, city: str | None = None, spe
             }   
     
     # Create an interrupt with the interruption value and a response schema
-    decisions = interrupt(value = interruption_value, response_schema={"decisions": "list"})
+    decisions = interrupt(value=interruption_value,
+                          response_schema={
+                              "decisions": [
+                                  {
+                                      "type": "respond",
+                                      "message": "Integer representing the index of the selected lawyer from the list."
+                                    }
+                                ]
+                            }
+                        )
 
     # Extract the user's decision from the interrupt
     decisions = decisions.get("decisions", [])
