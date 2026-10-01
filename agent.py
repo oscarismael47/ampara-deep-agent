@@ -2,26 +2,18 @@ from deepagents import create_deep_agent
 from deepagents.backends import StateBackend
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.types import Command
+from prompts.prompts import SYSTEM_PROMPT
 from utils.models import model
-from tools.lawyers import find_lawyers
+from tools.lawyers import get_lawyer_table_info, find_lawyers
 
-SYSTEM_PROMPT = """
-Eres un asistente legal útil. Tienes acceso a una base de datos de abogados.
-
-Preguntale al usuario la descripción de su caso legal, la ciudad, el estado y la especialidad del abogado que necesita. 
-
-Genera una descripcion del abaogado que el usuario necesita, incluyendo la ciudad, el estado y la especialidad.
-Usa la tool `find_lawyers` para buscar abogados que coincidan con la descripción generada.
-
-Una vez que el usuario seleccione un abogado, proporciónale sus datos de contacto y cualquier otra información relevante."""
-
+# Create the deep agent
 agent = create_deep_agent(
     name="ampara-deep-agent",
     system_prompt=SYSTEM_PROMPT,
     model=model,
     backend=StateBackend(),
-    tools=[find_lawyers],
-    #checkpointer=MemorySaver(),
+    tools=[get_lawyer_table_info, find_lawyers],
+    # checkpointer=MemorySaver(),
 )
 
 if __name__ == "__main__":

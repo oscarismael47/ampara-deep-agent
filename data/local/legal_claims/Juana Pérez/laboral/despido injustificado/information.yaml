@@ -1,0 +1,32 @@
+informacion:
+  parte_usuario:
+    - campo: nombre_trabajador
+      tipo: obligatorio
+    - campo: nombre_empleador
+      tipo: obligatorio
+    - campo: domicilio_trabajador
+      tipo: obligatorio
+    - campo: puesto_desempenado
+      tipo: obligatorio
+    - campo: fecha_de_ingreso
+      tipo: obligatorio
+    - campo: fecha_del_despido
+      tipo: obligatorio
+    - campo: salario_diario_integrado
+      tipo: obligatorio
+    - campo: motivo_del_despido
+      tipo: obligatorio
+    - campo: hechos_del_despido
+      tipo: obligatorio
+    - campo: prestaciones_reclamadas
+      tipo: opcional
+
+  parte_abogado:
+    - campo: nombre_abogado
+      tipo: obligatorio
+
+  reclamacion:
+    - campo: lugar_presentacion
+      tipo: obligatorio
+    - campo: fecha_presentacion
+      tipo: obligatorio

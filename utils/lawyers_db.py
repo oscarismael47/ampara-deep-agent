@@ -67,7 +67,8 @@ def ingest_lawyers_from_json(json_path: str) -> None:
     rows = []
     for lawyer in lawyers:
         lawyer_name = lawyer.get("nombre")
-        lawyer_specialties = lawyer.get("especialidades", [])
+        areas_legales = lawyer.get("areas_legales", [])
+        tipo_casos = lawyer.get("tipo_casos", [])
         lawyer_city = lawyer.get("ciudad")
         lawyer_state = lawyer.get("estado")
         lawyer_experience = lawyer.get("anios_experiencia")
@@ -80,7 +81,8 @@ def ingest_lawyers_from_json(json_path: str) -> None:
         # Remove accents and convert to lowercase for consistent searching
         lawyer_city = normalize_string(lawyer_city) if lawyer_city else None
         lawyer_state = normalize_string(lawyer_state) if lawyer_state else None
-        lawyer_specialties = [normalize_string(s) for s in lawyer_specialties] if lawyer_specialties else []
+        areas_legales = [normalize_string(s) for s in areas_legales] if areas_legales else []
+        tipo_casos = [normalize_string(s) for s in tipo_casos] if tipo_casos else []
 
         # Generate embedding for the lawyer's description
         lawyer_embedding = embeddings.embed_query(lawyer_description)
@@ -88,7 +90,8 @@ def ingest_lawyers_from_json(json_path: str) -> None:
         # Prepare the row for insertion into the database
         rows.append((
             lawyer_name,
-            lawyer_specialties,
+            areas_legales,
+            tipo_casos,
             lawyer_city,
             lawyer_state,
             lawyer_experience,
@@ -102,9 +105,10 @@ def ingest_lawyers_from_json(json_path: str) -> None:
             cursor.execute("CREATE EXTENSION IF NOT EXISTS vector")
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS abogados (
-                    id SERIAL PRIMARY KEY,
+                    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
                     nombre TEXT NOT NULL,
-                    especialidades TEXT[],
+                    areas_legales TEXT[],
+                    tipo_casos TEXT[],
                     ciudad TEXT,
                     estado TEXT,
                     anios_experiencia INT,
@@ -115,18 +119,46 @@ def ingest_lawyers_from_json(json_path: str) -> None:
             """)
             cursor.executemany("""
                 INSERT INTO abogados (
-                    nombre, especialidades, ciudad, estado, anios_experiencia,
+                    nombre, areas_legales, tipo_casos, ciudad, estado, anios_experiencia,
                     cedula_profesional, descripcion, embedding
                 )
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s::vector)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s::vector)
             """, rows)
+
+
+def get_lawyer_table_info() -> dict[str, Any]:
+    """
+    Retrieves table description information for the 'abogados' table in the PostgreSQL database.
+    Retrieves first 3 rows as example data.
+
+    Returns:
+        list[dict[str, Any]]: A list of dictionaries containing lawyers' information.
+    """
+    with _get_db_connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute("""
+                SELECT column_name, data_type
+                FROM information_schema.columns
+                WHERE table_name = 'abogados';
+            """)
+            columns_info = cursor.fetchall()
+
+            cursor.execute("SELECT * FROM abogados LIMIT 3;")
+            example_rows = cursor.fetchall()
+
+    # Convert the results into a list of dictionaries for easier consumption
+    column_names = [col[0] for col in columns_info]
+    example_data = [dict(zip(column_names, row)) for row in example_rows]
+
+    return {"columns_info": columns_info, "example_data": example_data}
 
 
 def search_lawyers(
     description: str,
     city: str | None = None,
     state: str | None = None,
-    specialities: list[str] | None = None,
+    legal_areas: list[str] | None = None,
+    case_types: list[str] | None = None,
     limit: int = 3,
 ) -> list[dict[str, Any]]:
     """
@@ -135,7 +167,8 @@ def search_lawyers(
         description (str): The description to search for.
         city (str, optional): The city to filter by. Defaults to None.
         state (str, optional): The state to filter by. Defaults to None.
-        speciality (str, optional): The speciality to filter by. Defaults to None.
+        legal_areas (list[str], optional): The legal areas to filter by. Defaults to None.
+        case_types (list[str], optional): The types of cases to filter by. Defaults to None.
         limit (int, optional): The maximum number of results to return. Defaults to 3.
     Returns:
         list: A list of lawyers matching the search criteria.
@@ -149,7 +182,7 @@ def search_lawyers(
     query_vector = _to_pgvector(query_embedding)
 
     sql_query = """
-        SELECT nombre, especialidades, ciudad, estado, anios_experiencia,
+        SELECT id, nombre, areas_legales, tipo_casos, ciudad, estado, anios_experiencia,
                cedula_profesional, descripcion,
                embedding <-> %s::vector AS distancia
         FROM abogados
@@ -167,11 +200,17 @@ def search_lawyers(
         conditions.append("estado = %s")
         params.append(state)
 
-    if specialities:
-        for speciality in specialities:
-            speciality = normalize_string(speciality)
-            conditions.append("%s = ANY(especialidades)")
-            params.append(speciality)
+    if legal_areas:
+        for area in legal_areas:
+            area = normalize_string(area)
+            conditions.append("%s = ANY(areas_legales)")
+            params.append(area)
+
+    if case_types:
+        for caso in case_types:
+            caso = normalize_string(caso)
+            conditions.append("%s = ANY(tipo_casos)")
+            params.append(caso)
 
     if conditions:
         sql_query += " WHERE " + " AND ".join(conditions)
@@ -186,10 +225,12 @@ def search_lawyers(
 
     lawyers = []
     for result in search_results:
-        lawyer_name, specialties, city, state, experience, license_number, description, distance = result
+        lawyer_id, lawyer_name, legal_areas, case_types, city, state, experience, license_number, description, distance = result
         lawyers.append({
+            "id": lawyer_id,
             "nombre": lawyer_name,
-            "especialidades": specialties,
+            "areas_legales": legal_areas,
+            "tipo_casos": case_types,
             "ciudad": city,
             "estado": state,
             "anios_experiencia": experience,
@@ -223,14 +264,19 @@ def normalize_string(value: str) -> str:
 
 
 if __name__ == "__main__":
-    
-    INGEST = True  # Set to True to ingest lawyers from the JSON file
+    # Example usage
+    INGEST = False  # Set to True to ingest lawyers from the JSON file
 
     if INGEST:
         # Ingest lawyers from the JSON file into the vectorstore
         ingest_lawyers_from_json(json_path="data/lawyers.json")
 
+    # Example table info
+    table_info = get_lawyer_table_info()
+    print(f"Table Info: {table_info}")
+
     # Example search
     search_results = search_lawyers(description="juicios civiles, arrendamientos, herencias y amparos relacionados con derechos civiles. Ha asesorado a clientes en la redacción de contratos", limit=3)
     for result in search_results:   
         print(f"Lawyer: {result['nombre']}, Description: {result['descripcion']}, Distance: {result['distancia']}, City: {result['ciudad']}, State: {result['estado']}")
+

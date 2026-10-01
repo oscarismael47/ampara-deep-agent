@@ -1,0 +1,24 @@
+documentos_requeridos:
+  parte_usuario:
+    - documento: ine_acusado
+      tipo: obligatorio
+    - documento: citatorio_o_notificacion
+      tipo: obligatorio
+      nota: Solo si la autoridad entregó un citatorio, orden o notificación.
+    - documento: carpeta_de_investigacion
+      tipo: opcional
+      nota: Si se cuenta con copias o acceso a la carpeta de investigación.
+    - documento: pruebas_de_descargo
+      tipo: opcional
+    - documento: comprobante_domicilio_acusado
+      tipo: obligatorio
+
+  parte_abogado:
+    - documento: carta_de_designacion_o_poder
+      tipo: obligatorio
+    - documento: cedula_profesional_abogado
+      tipo: obligatorio
+
+  autoridad:
+    - documento: resolucion_o_acto_reclamado
+      tipo: opcional

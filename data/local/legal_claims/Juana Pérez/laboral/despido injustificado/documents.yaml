@@ -1,0 +1,21 @@
+documentos_requeridos:
+  parte_usuario:
+    - documento: ine_trabajador
+      tipo: obligatorio
+    - documento: contrato_individual_de_trabajo
+      tipo: obligatorio
+      nota: Solo si existe contrato escrito.
+    - documento: recibos_de_nomina
+      tipo: obligatorio
+    - documento: aviso_de_despido_o_terminacion
+      tipo: opcional
+    - documento: comprobante_domicilio_trabajador
+      tipo: obligatorio
+    - documento: comunicaciones_con_el_empleador
+      tipo: opcional
+
+  parte_abogado:
+    - documento: carta_de_designacion
+      tipo: opcional
+    - documento: cedula_profesional_abogado
+      tipo: obligatorio

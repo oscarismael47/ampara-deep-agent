@@ -1,0 +1,26 @@
+informacion:
+  parte_usuario:
+    - campo: nombres_de_las_partes
+      tipo: obligatorio
+    - campo: relacion_familiar
+      tipo: obligatorio
+    - campo: obligaciones_que_se_regulan
+      tipo: obligatorio
+    - campo: acuerdos_sobre_convivencia
+      tipo: opcional
+    - campo: acuerdos_sobre_gastos
+      tipo: opcional
+    - campo: vigencia_del_convenio
+      tipo: obligatorio
+    - campo: mecanismo_de_cumplimiento
+      tipo: obligatorio
+
+  parte_abogado:
+    - campo: nombre_abogado
+      tipo: obligatorio
+
+  convenio:
+    - campo: lugar_de_firma
+      tipo: obligatorio
+    - campo: fecha_de_firma
+      tipo: obligatorio

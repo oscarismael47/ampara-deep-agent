@@ -1,0 +1,27 @@
+informacion:
+  parte_usuario:
+    - campo: nombre_actor
+      tipo: obligatorio
+    - campo: domicilio_actor
+      tipo: obligatorio
+    - campo: nombre_demandado
+      tipo: obligatorio
+    - campo: domicilio_demandado
+      tipo: obligatorio
+    - campo: hechos_del_conflicto
+      tipo: obligatorio
+    - campo: pretensiones
+      tipo: obligatorio
+    - campo: monto_reclamado
+      tipo: opcional
+      nota: Solo si la reclamación incluye una cantidad determinada.
+
+  parte_abogado:
+    - campo: nombre_abogado
+      tipo: obligatorio
+
+  demanda:
+    - campo: lugar_presentacion
+      tipo: obligatorio
+    - campo: fecha_presentacion
+      tipo: obligatorio

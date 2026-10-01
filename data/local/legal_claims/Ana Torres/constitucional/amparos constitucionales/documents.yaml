@@ -1,0 +1,24 @@
+documentos_requeridos:
+  parte_usuario:
+    - documento: ine_promovente
+      tipo: obligatorio
+    - documento: comprobante_domicilio_promovente
+      tipo: obligatorio
+    - documento: acto_reclamado
+      tipo: obligatorio
+      nota: Resolución, orden, norma u omisión de la autoridad que afecta los derechos del promovente.
+    - documento: constancia_de_notificacion
+      tipo: opcional
+      nota: Solo si el acto fue notificado formalmente.
+    - documento: pruebas_de_la_afectacion
+      tipo: obligatorio
+
+  parte_abogado:
+    - documento: carta_de_designacion_o_poder
+      tipo: obligatorio
+    - documento: cedula_profesional_abogado
+      tipo: obligatorio
+
+  autoridad:
+    - documento: informe_o_resolucion_de_la_autoridad
+      tipo: opcional

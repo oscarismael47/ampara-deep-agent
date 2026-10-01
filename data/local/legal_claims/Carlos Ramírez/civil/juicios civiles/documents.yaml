@@ -1,0 +1,21 @@
+documentos_requeridos:
+  parte_usuario:
+    - documento: ine_acreedor
+      tipo: obligatorio
+    - documento: comprobante_domicilio_acreedor
+      tipo: obligatorio
+    - documento: contrato_o_documento_base
+      tipo: obligatorio
+      nota: Documento que acredita la relación jurídica o el incumplimiento reclamado.
+    - documento: pruebas_del_incumplimiento
+      tipo: obligatorio
+    - documento: comprobantes_de_pago
+      tipo: opcional
+      nota: Solo si existen pagos relacionados con el conflicto.
+
+  parte_abogado:
+    - documento: poder_notarial
+      tipo: opcional
+      nota: Solo si el cliente comparece mediante representante.
+    - documento: cedula_profesional_abogado
+      tipo: obligatorio

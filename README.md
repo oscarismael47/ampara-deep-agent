@@ -10,9 +10,11 @@ Open git bash
 chmod +x start.sh
 ./start.sh
 
-# To test in langsmith
+# To test in local
 
 uv run langgraph dev
+
+https://agentchat.vercel.app/
 
 
 # Ingest lawyers

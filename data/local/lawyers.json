@@ -1,0 +1,62 @@
+[
+    {
+        "nombre": "Juana Pérez",
+        "areas_legales": ["Laboral"],
+        "tipo_casos": ["Despidos injustificados", "Indemnizaciones", "Amparos laborales"],
+        "ciudad": "León",
+        "estado": "Guanajuato",
+        "anios_experiencia": 8,
+        "cedula_profesional": "1234567",
+        "descripcion": "Abogada laboralista con 8 años de experiencia en litigio de despidos injustificados, negociación de indemnizaciones y juicios ante la Junta de Conciliación y Arbitraje. También maneja amparos directos en materia laboral. Ha representado tanto a trabajadores como a empresas medianas."
+    },
+    {
+        "nombre": "Carlos Ramírez",
+        "areas_legales": ["Civil"],
+        "tipo_casos": ["Juicios civiles", "Arrendamientos", "Herencias", "Amparos civiles"],
+        "ciudad": "Guadalajara",
+        "estado": "Jalisco",
+        "anios_experiencia": 12,
+        "cedula_profesional": "7654321",
+        "descripcion": "Abogado civil con más de 12 años de experiencia en juicios civiles, arrendamientos, herencias y amparos relacionados con derechos civiles. Ha asesorado a clientes en la redacción de contratos y en la resolución de conflictos familiares."
+    },
+    {
+        "nombre": "María López",
+        "areas_legales": ["Penal"],
+        "tipo_casos": ["Defensa de personas acusadas de delitos", "Amparos penales"],
+        "ciudad": "Monterrey",
+        "estado": "Nuevo León",
+        "anios_experiencia": 15,
+        "cedula_profesional": "9876543",
+        "descripcion": "Abogada penalista con 15 años de experiencia en defensa de personas acusadas de delitos, incluyendo delitos graves y amparos relacionados con el derecho penal. Ha trabajado en casos de alto perfil y tiene un historial comprobado de éxito en tribunales."
+    },
+    {
+        "nombre": "Sofía Hernández",
+        "areas_legales": ["Familiar"],
+        "tipo_casos": ["Divorcios", "Guarda y custodia", "Pensiones alimenticias", "Sucesiones", "Convenios familiares"],
+        "ciudad": "Ciudad de México",
+        "estado": "Ciudad de México",
+        "anios_experiencia": 10,
+        "cedula_profesional": "2468135",
+        "descripcion": "Abogada especializada en derecho familiar y civil. Atiende divorcios, guarda y custodia, pensiones alimenticias, sucesiones y convenios familiares. También asesora en la elaboración de contratos y en la solución de conflictos mediante mediación."
+    },
+    {
+        "nombre": "Luis Martínez",
+        "areas_legales": ["Civil"],
+        "tipo_casos": ["Juicios civiles", "Arrendamientos", "Herencias", "Amparos civiles"],
+        "ciudad": "Mérida",
+        "estado": "Yucatán",
+        "anios_experiencia": 7,
+        "cedula_profesional": "1357924",
+        "descripcion": "Abogado civil con 7 años de experiencia en juicios civiles, arrendamientos, herencias y amparos relacionados con derechos civiles. Ha asesorado a clientes en la redacción de contratos y en la resolución de conflictos familiares."
+    },
+    {
+        "nombre": "Ana Torres",
+        "areas_legales": ["Constitucional"],
+        "tipo_casos": ["Amparos constitucionales", "Derechos fundamentales"],
+        "ciudad": "Puebla",
+        "estado": "Puebla",
+        "anios_experiencia": 9,
+        "cedula_profesional": "1928374",
+        "descripcion": "Abogada especializada en derecho constitucional y en la protección de los derechos fundamentales."
+    }
+]

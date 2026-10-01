@@ -1,0 +1,20 @@
+documentos_requeridos:
+  parte_usuario:
+    - documento: ine_solicitante
+      tipo: obligatorio
+    - documento: actas_de_nacimiento_de_los_beneficiarios
+      tipo: obligatorio
+    - documento: comprobantes_de_gastos
+      tipo: obligatorio
+    - documento: comprobante_domicilio
+      tipo: obligatorio
+    - documento: pruebas_de_ingresos_del_deudor
+      tipo: opcional
+    - documento: resolucion_o_convenio_previo
+      tipo: opcional
+
+  parte_abogado:
+    - documento: poder_notarial
+      tipo: opcional
+    - documento: cedula_profesional_abogado
+      tipo: obligatorio

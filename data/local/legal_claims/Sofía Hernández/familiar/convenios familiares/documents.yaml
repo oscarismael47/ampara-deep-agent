@@ -1,0 +1,21 @@
+documentos_requeridos:
+  parte_usuario:
+    - documento: ine_de_las_partes
+      tipo: obligatorio
+    - documento: actas_del_estado_civil_relacionadas
+      tipo: obligatorio
+    - documento: actas_de_nacimiento_de_los_hijos
+      tipo: opcional
+      nota: Solo si el convenio involucra a hijos.
+    - documento: comprobantes_de_ingresos_y_gastos
+      tipo: opcional
+    - documento: propuesta_de_convenio
+      tipo: opcional
+    - documento: comprobante_domicilio_de_las_partes
+      tipo: obligatorio
+
+  parte_abogado:
+    - documento: poder_notarial
+      tipo: opcional
+    - documento: cedula_profesional_abogado
+      tipo: obligatorio

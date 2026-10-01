@@ -1,0 +1,26 @@
+informacion:
+  parte_usuario:
+    - campo: nombre_del_acreedor_alimentario
+      tipo: obligatorio
+    - campo: nombre_del_deudor_alimentario
+      tipo: obligatorio
+    - campo: parentesco_o_relacion_juridica
+      tipo: obligatorio
+    - campo: necesidades_del_acreedor
+      tipo: obligatorio
+    - campo: ingresos_y_posibilidades_del_deudor
+      tipo: obligatorio
+    - campo: monto_solicitado
+      tipo: obligatorio
+    - campo: adeudo_acumulado
+      tipo: opcional
+
+  parte_abogado:
+    - campo: nombre_abogado
+      tipo: obligatorio
+
+  demanda:
+    - campo: lugar_presentacion
+      tipo: obligatorio
+    - campo: fecha_presentacion
+      tipo: obligatorio

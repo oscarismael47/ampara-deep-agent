@@ -1,0 +1,21 @@
+documentos_requeridos:
+  parte_usuario:
+    - documento: ine_promovente
+      tipo: obligatorio
+    - documento: acto_reclamado_en_materia_civil
+      tipo: obligatorio
+    - documento: resolucion_o_sentencia_civil
+      tipo: opcional
+      nota: Solo si el acto deriva de un juicio civil.
+    - documento: constancia_de_notificacion
+      tipo: obligatorio
+    - documento: actuaciones_del_juicio_civil
+      tipo: opcional
+    - documento: comprobante_domicilio_promovente
+      tipo: obligatorio
+
+  parte_abogado:
+    - documento: carta_de_designacion
+      tipo: obligatorio
+    - documento: cedula_profesional_abogado
+      tipo: obligatorio

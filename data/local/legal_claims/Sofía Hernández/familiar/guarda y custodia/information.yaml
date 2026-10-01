@@ -1,0 +1,26 @@
+informacion:
+  parte_usuario:
+    - campo: nombre_del_progenitor_solicitante
+      tipo: obligatorio
+    - campo: nombre_del_otro_progenitor
+      tipo: obligatorio
+    - campo: nombres_y_edades_de_los_hijos
+      tipo: obligatorio
+    - campo: domicilio_actual_de_los_hijos
+      tipo: obligatorio
+    - campo: regimen_actual_de_custodia
+      tipo: obligatorio
+    - campo: razones_de_la_solicitud
+      tipo: obligatorio
+    - campo: propuesta_de_custodia_y_convivencia
+      tipo: obligatorio
+
+  parte_abogado:
+    - campo: nombre_abogado
+      tipo: obligatorio
+
+  solicitud:
+    - campo: lugar_presentacion
+      tipo: obligatorio
+    - campo: fecha_presentacion
+      tipo: obligatorio

@@ -1,0 +1,31 @@
+---
+# DEMANDA DE DIVORCIO
+
+**C. JUEZ FAMILIAR EN TURNO**
+**PRESENTE**
+
+**{{ nombre_conyuge_solicitante }}**, señalando como domicilio {{ domicilio_conyuge_solicitante }}, y autorizando a {{ nombre_abogado }}, solicito el divorcio de **{{ nombre_del_otro_conyuge }}**.
+
+## HECHOS
+
+1. El matrimonio se celebró el {{ fecha_y_lugar_del_matrimonio }}.
+2. {{ existencia_de_hijos }}.
+3. El régimen matrimonial es {{ regimen_matrimonial }}.
+
+## PROPUESTAS
+
+{% if propuesta_sobre_alimentos_y_custodia %}a) Alimentos y custodia: {{ propuesta_sobre_alimentos_y_custodia }}.
+{% endif %}{% if propuesta_de_division_de_bienes %}b) División de bienes: {{ propuesta_de_division_de_bienes }}.
+{% endif %}
+
+## PETICIONES
+
+**PRIMERO.** Admitir la solicitud de divorcio.
+**SEGUNDO.** Resolver las medidas familiares que correspondan.
+**TERCERO.** Decretar la disolución del vínculo matrimonial.
+
+{{ lugar_presentacion }}, a {{ fecha_presentacion }}
+
+**PROTESTO LO NECESARIO.**
+
+[Firma]

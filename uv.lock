@@ -141,7 +141,7 @@ requires-dist = [
     { name = "langchain-openai" },
     { name = "langchain-postgres" },
     { name = "langchain-quickjs" },
-    { name = "langgraph", specifier = ">=1.0.0,<2.0" },
+    { name = "langgraph", specifier = ">=1.2.12" },
     { name = "langgraph-cli", extras = ["inmem"] },
     { name = "psycopg", extras = ["binary"] },
     { name = "python-dotenv" },

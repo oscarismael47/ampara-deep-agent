@@ -1,0 +1,20 @@
+documentos_requeridos:
+  parte_usuario:
+    - documento: ine_arrendador_o_arrendatario
+      tipo: obligatorio
+    - documento: contrato_de_arrendamiento
+      tipo: obligatorio
+    - documento: comprobantes_de_pago
+      tipo: obligatorio
+    - documento: comunicaciones_sobre_el_incumplimiento
+      tipo: opcional
+    - documento: comprobante_domicilio
+      tipo: obligatorio
+    - documento: inventario_y_estado_del_inmueble
+      tipo: opcional
+
+  parte_abogado:
+    - documento: poder_notarial
+      tipo: opcional
+    - documento: cedula_profesional_abogado
+      tipo: obligatorio

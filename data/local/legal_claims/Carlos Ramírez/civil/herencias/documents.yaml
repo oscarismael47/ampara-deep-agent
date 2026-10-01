@@ -1,0 +1,21 @@
+documentos_requeridos:
+  parte_usuario:
+    - documento: ine_heredero
+      tipo: obligatorio
+    - documento: acta_de_defuncion
+      tipo: obligatorio
+    - documento: actas_del_estado_civil_de_los_herederos
+      tipo: obligatorio
+    - documento: testamento
+      tipo: opcional
+      nota: Solo si existe testamento.
+    - documento: documentos_de_bienes_y_deudas
+      tipo: obligatorio
+    - documento: comprobante_domicilio_heredero
+      tipo: obligatorio
+
+  parte_abogado:
+    - documento: poder_notarial
+      tipo: opcional
+    - documento: cedula_profesional_abogado
+      tipo: obligatorio

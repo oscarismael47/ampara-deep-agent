@@ -1,0 +1,24 @@
+documentos_requeridos:
+  parte_usuario:
+    - documento: ine_solicitante
+      tipo: obligatorio
+    - documento: acta_de_matrimonio
+      tipo: obligatorio
+    - documento: actas_de_nacimiento_de_hijos
+      tipo: opcional
+      nota: Solo si existen hijos en común.
+    - documento: comprobante_domicilio_solicitante
+      tipo: obligatorio
+    - documento: documentos_de_bienes
+      tipo: opcional
+      nota: Si se requiere definir la liquidación de bienes.
+    - documento: convenio_de_divorcio
+      tipo: opcional
+      nota: Solo si las partes ya cuentan con un acuerdo.
+
+  parte_abogado:
+    - documento: poder_notarial
+      tipo: opcional
+      nota: Solo si el cliente comparece mediante representante.
+    - documento: cedula_profesional_abogado
+      tipo: obligatorio

@@ -1,0 +1,26 @@
+informacion:
+  parte_usuario:
+    - campo: nombre_arrendador_o_arrendatario
+      tipo: obligatorio
+    - campo: nombre_de_la_contraparte
+      tipo: obligatorio
+    - campo: domicilio_del_inmueble
+      tipo: obligatorio
+    - campo: fecha_de_inicio_del_arrendamiento
+      tipo: obligatorio
+    - campo: renta_pactada
+      tipo: obligatorio
+    - campo: incumplimiento_reclamado
+      tipo: obligatorio
+    - campo: pagos_pendientes
+      tipo: opcional
+
+  parte_abogado:
+    - campo: nombre_abogado
+      tipo: obligatorio
+
+  demanda:
+    - campo: lugar_presentacion
+      tipo: obligatorio
+    - campo: fecha_presentacion
+      tipo: obligatorio

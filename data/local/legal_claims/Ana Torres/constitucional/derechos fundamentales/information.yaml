@@ -1,0 +1,26 @@
+informacion:
+  parte_usuario:
+    - campo: nombre_promovente
+      tipo: obligatorio
+    - campo: derecho_fundamental_afectado
+      tipo: obligatorio
+    - campo: autoridad_o_particular_responsable
+      tipo: obligatorio
+    - campo: hechos_de_la_vulneracion
+      tipo: obligatorio
+    - campo: fecha_de_la_afectacion
+      tipo: obligatorio
+    - campo: afectacion_actual
+      tipo: obligatorio
+    - campo: reparacion_solicitada
+      tipo: obligatorio
+
+  parte_abogado:
+    - campo: nombre_abogado
+      tipo: obligatorio
+
+  solicitud:
+    - campo: lugar_presentacion
+      tipo: obligatorio
+    - campo: fecha_presentacion
+      tipo: obligatorio

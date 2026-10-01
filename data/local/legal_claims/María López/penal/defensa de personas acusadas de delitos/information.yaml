@@ -1,0 +1,26 @@
+informacion:
+  parte_usuario:
+    - campo: nombre_acusado
+      tipo: obligatorio
+    - campo: domicilio_acusado
+      tipo: obligatorio
+    - campo: delito_imputado
+      tipo: obligatorio
+    - campo: numero_carpeta_o_causa
+      tipo: opcional
+    - campo: autoridad_responsable
+      tipo: obligatorio
+    - campo: hechos_de_la_acusacion
+      tipo: obligatorio
+    - campo: situacion_procesal
+      tipo: obligatorio
+
+  parte_abogado:
+    - campo: nombre_abogado
+      tipo: obligatorio
+
+  defensa:
+    - campo: lugar_de_la_actuacion
+      tipo: obligatorio
+    - campo: fecha_de_la_actuacion
+      tipo: obligatorio

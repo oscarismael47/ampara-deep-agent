@@ -1,0 +1,29 @@
+informacion:
+  parte_usuario:
+    - campo: nombre_conyuge_solicitante
+      tipo: obligatorio
+    - campo: nombre_del_otro_conyuge
+      tipo: obligatorio
+    - campo: domicilio_conyuge_solicitante
+      tipo: obligatorio
+    - campo: fecha_y_lugar_del_matrimonio
+      tipo: obligatorio
+    - campo: existencia_de_hijos
+      tipo: obligatorio
+    - campo: regimen_matrimonial
+      tipo: obligatorio
+    - campo: propuesta_sobre_alimentos_y_custodia
+      tipo: opcional
+      nota: Solo si existen hijos en común.
+    - campo: propuesta_de_division_de_bienes
+      tipo: opcional
+
+  parte_abogado:
+    - campo: nombre_abogado
+      tipo: obligatorio
+
+  demanda:
+    - campo: lugar_presentacion
+      tipo: obligatorio
+    - campo: fecha_presentacion
+      tipo: obligatorio

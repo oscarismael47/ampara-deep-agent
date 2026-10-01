@@ -1,0 +1,26 @@
+informacion:
+  parte_usuario:
+    - campo: nombre_promovente
+      tipo: obligatorio
+    - campo: autoridad_responsable
+      tipo: obligatorio
+    - campo: acto_reclamado
+      tipo: obligatorio
+    - campo: numero_de_expediente_laboral
+      tipo: obligatorio
+    - campo: fecha_de_notificacion
+      tipo: obligatorio
+    - campo: derechos_laborales_vulnerados
+      tipo: obligatorio
+    - campo: antecedentes_del_procedimiento
+      tipo: obligatorio
+
+  parte_abogado:
+    - campo: nombre_abogado
+      tipo: obligatorio
+
+  demanda:
+    - campo: lugar_presentacion
+      tipo: obligatorio
+    - campo: fecha_presentacion
+      tipo: obligatorio

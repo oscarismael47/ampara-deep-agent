@@ -1,0 +1,18 @@
+documentos_requeridos:
+  parte_usuario:
+    - documento: ine_promovente
+      tipo: obligatorio
+    - documento: evidencia_de_la_vulneracion
+      tipo: obligatorio
+    - documento: comunicaciones_o_resoluciones_relacionadas
+      tipo: opcional
+    - documento: comprobante_domicilio_promovente
+      tipo: obligatorio
+    - documento: pruebas_del_dano_o_afectacion
+      tipo: obligatorio
+
+  parte_abogado:
+    - documento: carta_de_designacion
+      tipo: obligatorio
+    - documento: cedula_profesional_abogado
+      tipo: obligatorio
