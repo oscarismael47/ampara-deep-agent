@@ -1,19 +1,22 @@
-from deepagents import create_deep_agent
+from deepagents import create_deep_agent, FilesystemPermission
 from deepagents.backends import StateBackend
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.types import Command
 from prompts.prompts import SYSTEM_PROMPT
 from utils.models import model
-from tools.lawyers import get_lawyer_table_info, find_lawyers
+from schemas.schemas import MainAgentState
+from tools.lawyers import get_lawyers_table_info, find_lawyers
+
 
 # Create the deep agent
 agent = create_deep_agent(
-    name="ampara-deep-agent",
+    state_schema=MainAgentState,
+    name="ampara_deep_agent",
     system_prompt=SYSTEM_PROMPT,
     model=model,
     backend=StateBackend(),
-    tools=[get_lawyer_table_info, find_lawyers],
-    # checkpointer=MemorySaver(),
+    tools=[get_lawyers_table_info, find_lawyers],
+    checkpointer=MemorySaver(),
 )
 
 if __name__ == "__main__":
@@ -36,6 +39,7 @@ if __name__ == "__main__":
 
             # Extract interrupt information
             interrupt_value = agent_response.interrupts[0].value  
+            response_schema = agent_response.interrupts[0].response_schema
             action_requests = interrupt_value["action_requests"]
             review_configs = interrupt_value["review_configs"]
 
@@ -52,16 +56,16 @@ if __name__ == "__main__":
                 print(f"Descripcion: {action['description']}")
                 available_lawyers = action['args']
                 for idx, lawyer in enumerate(available_lawyers, start=1):
-                    print(f"{idx}: {lawyer['nombre']} - {lawyer['especialidades']} - {lawyer['ciudad']}, {lawyer['estado']}")
+                    print(f"{idx}: {lawyer['nombre']} - {lawyer['areas_legales']} - {lawyer['ciudad']}, {lawyer['estado']}")
 
                 # Prompt the user to select a lawyer from the list
-                decision = input("Selecciona un abogado de la lista (proporciona el índice): ")
+                decision = input("Selecciona un abogado de la lista (proporciona el nombre): ")
 
                 # Append the user's decision to the decisions list
                 decisions.append(
                     {
                         "type": "respond",
-                        "message": int(decision)  # Convert to integer
+                        "message": decision  # Convert to integer
                     }
                 )
 
